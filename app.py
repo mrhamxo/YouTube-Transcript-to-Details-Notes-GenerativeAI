@@ -53,7 +53,12 @@ def extract_transcript_details(youtube_video_url):
         transcript = " ".join([i["text"] for i in transcript_text])
         return transcript
     except Exception as e:
-        st.error(f"Error extracting transcript: {e}")
+        # Handle errors more gracefully
+        st.warning(
+            f"Could not retrieve the transcript for the video: {youtube_video_url}. "
+            f"This may be because subtitles are disabled or unavailable for this video. "
+            f"Please try another video or upload the transcript manually."
+        )
         return None
 
 # Generate summary using Google Gemini
